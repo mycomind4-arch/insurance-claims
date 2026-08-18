@@ -13,7 +13,11 @@ const workflows = {
 
 export function generateStaticParams(){return Object.keys(workflows).map(slug=>({slug}))}
 
-export async function generateMetadata({params}:{params:Promise<{slug:string}>}){const {slug}=await params;const [title,desc]=workflows[slug as keyof typeof workflows] ?? ['Insurance Claim Workflow','Insurance claim response workflow'];return {title:`${title} | Insurance Claims`,description:desc}}
+export async function generateMetadata({params}:{params:Promise<{slug:string}>}){
+  const {slug}=await params
+  const [title,desc]=workflows[slug as keyof typeof workflows] ?? ['Insurance Claim Workflow','Insurance claim response workflow']
+  return {title:`${title} | Insurance Claims`,description:desc,robots:{index:false,follow:true}}
+}
 
 export default async function WorkflowPage({params}:{params:Promise<{slug:string}>}){
   const {slug}=await params
